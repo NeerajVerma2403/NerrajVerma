@@ -1,0 +1,19 @@
+<script>
+    function call()
+    {
+        im.width=18
+        if(pwd.value==cpwd.value)
+        {
+            im.src="right.png" 
+        }
+        else
+        {
+            im.src="wrong.png"
+        }
+    }
+</script>
+<html>
+    <input type="password" id="pwd" placeholder="Password"><br><br>
+    <input type="password" id="cpwd" placeholder="Confirm Password" onkeyup="call()">
+    <img id="im">
+</html>

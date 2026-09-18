@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndusInd Bank Cheque Printing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .cheque {
+            width: 900px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fddddd;
+            position: relative;
+        }
+        .bank-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .field {
+            margin: 5px 0;
+        }
+        .print-btn {
+            margin: 20px auto;
+            display: block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .cheque p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .date-box, .rupees-box {
+            float: right;
+            margin-top: -40px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>IndusInd Bank Cheque Printing</h2>
+    <div>
+        <label>Payee Name:</label>
+        <input type="text" id="payeeName" class="field" placeholder="Enter payee name">
+        <br>
+        <label>Amount (in numbers):</label>
+        <input type="text" id="amountNumber" class="field" placeholder="Enter amount">
+        <br>
+        <label>Amount (in words):</label>
+        <input type="text" id="amountWords" class="field" placeholder="Enter amount in words">
+        <br>
+        <label>Date:</label>
+        <input type="date" id="date" class="field">
+    </div>
+    <button class="print-btn" onclick="printCheque()">Print Cheque</button>
+
+    <div class="cheque" id="chequePreview">
+        <div class="bank-name">IndusInd Bank Limited</div>
+        <p>Pay to the order of: <span id="payee"></span></p>
+        <p>Rupees: <span id="amountText"></span></p>
+        <div class="rupees-box">₹ <span id="amount"></span></div>
+        <div class="date-box">Date: <span id="chequeDate"></span></div>
+    </div>
+
+    <script>
+        function printCheque() {
+            const payee = document.getElementById('payeeName').value;
+            const amount = document.getElementById('amountNumber').value;
+            const amountWords = document.getElementById('amountWords').value;
+            const date = document.getElementById('date').value;
+
+            document.getElementById('payee').innerText = payee;
+            document.getElementById('amount').innerText = amount;
+            document.getElementById('amountText').innerText = amountWords;
+            document.getElementById('chequeDate').innerText = date;
+
+            const chequePreview = document.getElementById('chequePreview').innerHTML;
+            const originalContent = document.body.innerHTML;
+
+            document.body.innerHTML = chequePreview;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+    </script>
+</body>
+</html>

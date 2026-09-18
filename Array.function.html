@@ -1,0 +1,437 @@
+<!-- map -->
+
+<!-- <script>
+    function call()
+    {
+        var x=['Pepsi','Frooti','Limca','Fanta']
+        x.map(function(item,index){
+            console.log(item,index)
+        })
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[88,55,66,11,45]
+        x.map((item,index)=>{
+            console.log(item,index)
+        })
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[88,55,66,11,45]
+        var result=x.map(function(item,index){
+        var t=item*50
+        return t
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[88,55,66,11,45]
+        var result=x.map((item,index)=>item*50)
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.map((item,index)=>{
+            var dis=item[1]*10/100;
+            return [item[0],item[1],dis]
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.map((item,index)=>{
+            var dis=item[1]*10/100;
+            item.push(dis)
+            return item
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.map((item,index)=>{
+            var dis=item[1]>=50?item[1]*10/100:item[1]*5/100
+            item.push(dis)
+            return item
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.map((item,index)=>{
+            var dis=item[1]>=10 && item[1]<=30?item[1]*5/100:item[1]>30 && item[1]<=60?item[1]*10/100:item[1]*15/100
+            item.push(dis)
+            return item
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- filter -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.filter((item,index)=>item[1]>50)
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',67],['Fanta',89],['Mazza',23],['Frooti',45]]
+        var result=x.map((item,index)=>item[1]>50) //true,false
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Ajay',67,56,90],['Harry',10,20,30],['Peter',100,99,99],['Tony',45,89,90]]
+        var result=x.filter((item,index)=>{
+            var t=item[1]+item[2]+item[3]/3
+            return t>=60
+        })
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Amar',67,56,90],['Harry',10,20,30],['Amit',100,99,99],['Tony',45,89,90]]
+        var result=x.filter((item,index)=>item[0].startsWith('Am'))
+        console.log(result)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- reduce -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[10,5,15,200]
+        var y=x.reduce((a,b)=>{
+            return a+b
+        })
+        console.log(y)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',40,35],['Fanta',70,60],['Lays',50,25],['Uncle Chips',100,75]]
+        var totalamount=x.reduce((a,b)=>{
+            return a+b[1]
+        },0)
+        console.log("Total Amount:",totalamount)
+        var actualamount=x.reduce((a,b)=>{
+            return a+b[2]
+        },0)
+        console.log("Amount to Pay:",actualamount)
+        var save=totalamount-actualamount
+        console.log("You Save:",save)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- sort -->
+
+<!-- <script>
+    function call()
+    {
+        var x=[['Pepsi',40,35],['Fanta',70,60],['Lays',50,25],['Uncle Chips',100,75]]
+        var y=[4,10,1,500,7,89,100]
+        var result=y.sort((a,b)=>a>b?1:-1)
+        console.log(result)
+        var result=x.sort((a,b)=>a[0]>b[0]?1:-1)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- forEach -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[4,10,1,500,7,89,100]
+        y.forEach((element,i)=>{
+        console.log(element,i)
+        })
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- concat -->
+
+<!-- <script>
+    function call()
+    {
+        var x=["a","b","c"]
+        var y=["d","e","f"]
+        console.log(x.concat(y))
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- evrey -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[4,10,1,500,7,89,100]
+        var result=y.every((item)=>item<600)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- some -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[4,10,1,500,7,89,100]
+        var result=y.some((item)=>item>5)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- includes -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[4,10,1,500,7,89,100]
+        var result=y.includes(500)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- join -->
+
+<!-- <script>
+    function call()
+    {
+        var y=['Harry','Peter','Pramod','Tom']
+        var result=y.join('@')
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- find -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[11,22,33,44,55,66,77,88,80]
+        var result=y.find((item)=>item>5)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- findIndex -->
+
+<!-- <script>
+    function call()
+    {
+        var y=["Danny","Mandeep","John","Ruby"]
+        var result=y.findIndex((item)=>item=="Mandeep")
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- indexof -->
+
+<!-- <script>
+    function call()
+    {
+        var y=["Danny","Mandeep","John","Ruby"]
+        var result=y.indexOf("Mandeep")
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- fill -->
+
+<!-- <script>
+    function call()
+    {
+        var y=new Array(10)
+        var result=y.fill(300)
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- reverse -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[1,2,3]
+        var result=y.reverse()
+        console.log(result)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- push -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[1,2,3]
+        y.push(4)
+        console.log(y)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- pop -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[1,2,3]
+        var t=y.pop()
+        console.log(y)
+        console.log("Deleted Element:",t)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- shift -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[1,2,3]
+        var t=y.shift()
+        console.log(y)
+        console.log("Deleted Element:",t)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- unshift -->
+
+<!-- <script>
+    function call()
+    {
+        var y=[1,2,3]
+        var t=y.unshift(4)
+        console.log(y)
+        console.log(t)
+        }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->

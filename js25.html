@@ -1,0 +1,75 @@
+<script src="js25.js"></script>
+
+<html>
+    <table>
+        <caption><h3>Enter Student Data and Get Result</h3></caption>
+        <tr>
+            <td><b>Roll Number:</b></td>
+            <td><input type="text" name="rn" id="rn"></td>
+        </tr>
+
+        <tr>
+            <td><b>Student Name:</b></td>
+            <td>
+                <input type="text" placeholder="First Name" name="fn" id="fn">
+                <input type="text" placeholder="Last Name" name="ln" id="ln">
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Gender:</b></td>
+            <td>
+                <select id="gender"> 
+                    <option>Select:</option>
+                    <option>Male</option> 
+                    <option>Female</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Father Name:</b></td>
+            <td>
+                <input type="text" placeholder="First Name" name="fan" id="fan">
+                <input type="text" placeholder="Last Name" name="lan" id="lan">
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>School Name:</b></td>
+            <td><input type="text" name="sn" id="sn"></td>
+        </tr>
+
+        <tr>
+            <td><b>Date Of Birth:</b></td>
+            <td><input type="date" name="dob" id="dob"></td>
+        </tr>
+
+        <tr>
+            <td><b>Physics Marks:</b></td>
+            <td><input type="text" name="pm" id="pm"></td>
+        </tr>
+
+        <tr>
+            <td><b>Chemistry Marks:</b></td>
+            <td><input type="text" name="cm" id="cm"></td>
+        </tr>
+
+        <tr>
+            <td><b>Math Marks:</b></td>
+            <td><input type="text" name="mm" id="mm"></td>
+        </tr>
+
+        <tr>
+            <td><b>Hindi Marks:</b></td>
+            <td><input type="text" name="hm" id="hm"></td>
+        </tr>
+
+        <tr>
+            <td><b>English Marks:</b></td>
+            <td><input type="text" name="em" id="em"></td>
+        </tr>
+    </table><br><br>
+    <input type="button" value="Get Result" onclick="getResult()">
+    <div id="gr"></div>
+</html>

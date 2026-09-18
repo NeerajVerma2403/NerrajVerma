@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Time Remaining</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: #f4f4f4;
+        }
+        .battery-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .battery-level {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .charging {
+            color: green;
+            font-weight: bold;
+        }
+        .discharging {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="battery-container">
+        <h1>🔋 Laptop Battery Status</h1>
+        <p class="battery-level">Loading...</p>
+        <p class="status">Checking battery status...</p>
+        <p class="time-left"></p>
+    </div>
+
+    <script>
+        function updateBatteryStatus(battery) {
+            const batteryLevel = document.querySelector(".battery-level");
+            const status = document.querySelector(".status");
+            const timeLeft = document.querySelector(".time-left");
+
+            batteryLevel.textContent = `Battery: ${Math.round(battery.level * 100)}%`;
+
+            if (battery.charging) {
+                status.textContent = "⚡ Charging";
+                status.className = "status charging";
+                timeLeft.textContent = "";
+            } else {
+                status.textContent = "🔋 Discharging";
+                status.className = "status discharging";
+                
+                if (battery.dischargingTime > 0) {
+                    let hours = Math.floor(battery.dischargingTime / 3600);
+                    let minutes = Math.floor((battery.dischargingTime % 3600) / 60);
+                    timeLeft.textContent = `Estimated Time Left: ${hours}h ${minutes}m`;
+                } else {
+                    timeLeft.textContent = "Calculating time remaining...";
+                }
+            }
+        }
+
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                updateBatteryStatus(battery);
+
+                // Update on battery status change
+                battery.addEventListener("chargingchange", () => updateBatteryStatus(battery));
+                battery.addEventListener("levelchange", () => updateBatteryStatus(battery));
+                battery.addEventListener("dischargingtimechange", () => updateBatteryStatus(battery));
+            });
+        } else {
+            document.querySelector(".battery-level").textContent = "Battery API not supported";
+        }
+    </script>
+
+</body>
+</html>

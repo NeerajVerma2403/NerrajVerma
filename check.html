@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Invoice - Zaptodoor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .invoice-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* For watermark positioning */
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            width: 100%;
+            height: auto;
+        }
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .flex-container > div {
+            width: 48%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #f8f8f8;
+        }
+        .total {
+            font-weight: bold;
+            background: #f8f8f8;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .print-btn {
+            background: #28a745;
+            display: none;
+        }
+        .print-btn:hover {
+            background: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+        .payment-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1em;
+        }
+        #chequeMessage {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+        @media print {
+            #invoiceTable td:nth-child(5),
+            #invoiceTable th:nth-child(5) {
+                display: none !important; /* Completely hides the Action column */
+            }
+            #previewSection {
+                display: block !important;
+            }
+            .btn, #printButton, .image-preview {
+                display: none !important; /* Hide buttons and image upload section */
+            }
+            #gstRate, label[for="gstRate"] {
+                display: none;
+            }
+            /* Watermark styling for print */
+            .watermark {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -1;
+                opacity: 0.1; /* 10% transparency */
+                width: 80%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+        /* Styles for the image preview */
+        .image-preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .image-preview img {
+            max-width: 150px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <header>
+            <img id="headerImage" src="default-header.png" alt="Company Logo">
+        </header>
+        <h2 style="text-align: center;"> Zaptodoor Tax Invoice</h2>
+        <div>
+            <strong> Date :</strong> <span contenteditable="true" id="DD/MM/YYYY">DD/MM/YYYY</span><br>
+        </div>
+
+        <div class="flex-container">
+            <div>
+                <h3>Seller Details:</h3>
+                <strong>Company Name:</strong> Zaptodoor <br>
+                <strong>Address:</strong> GTB Tower 3rd Floor, Chamber #304, Gwalior, MP 474011 <br>
+                <strong>GST Number:</strong> 23GPOPS9236D2ZF <br>
+                <strong>Mobile Number:</strong> +91 9200018690 <br>
+            </div>
+            <div>
+                <h3>Buyer Details:</h3>
+                <strong>Restaurant Name:</strong> <span contenteditable="true" id="buyerName">Enter Name</span><br>
+                <strong>Customer Name:</strong> <span contenteditable="true" id="buyerName">Enter Name</span><br>
+                <strong>Address:</strong> <span contenteditable="true" id="buyerAddress">Enter Address</span><br>
+                <strong>GST Number:</strong> <span contenteditable="true" id="buyerGST">Enter GST</span><br>
+                <strong>Mobile Number:</strong> <span contenteditable="true" id="buyerMobile">Enter Mobile</span><br>
+            </div>
+        </div>
+    
+        <div class="image-preview">
+            <h3>Upload Logo/Image</h3>
+            <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)">
+            <div id="imageContainer"></div>
+        </div>
+
+        
+        <h3>GST Calculation</h3>
+        <label for="gstRate">Select GST Rate:</label>
+        <select id="gstRate" onchange="calculateInvoice()">
+            <option value="0">0%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+        </select>
+        
+        <h3>Mode Of Payment:</h3>
+        <select id="paymentMode" onchange="calculateInvoice()">
+            <option value="UPI">UPI</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="Cheque">Cheque</option>       
+        </select>
+        <span id="chequeMessage" style="display:none;">Cheque is subject to clear</span>
+        
+        <table id="invoiceTable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceBody">
+                <tr>
+                    <td>Restaurant Registration</td>
+                    <td contenteditable="true" oninput="calculateInvoice()">1</td>
+                    <td contenteditable="true" oninput="calculateInvoice()">₹1000</td>
+                    <td id="itemAmount">₹1000</td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Subtotal</strong></td>
+                    <td id="subTotal">₹1000</td>
+                </tr>
+                <tr>
+                    <td colspan="3">CGST (<span id="cgstRate">9%</span>)</td>
+                    <td id="cgst">₹90</td>
+                </tr>
+                <tr>
+                    <td colspan="3">SGST (<span id="sgstRate">9%</span>)</td>
+                    <td id="sgst">₹90</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Total</strong></td>
+                    <td id="totalAmount">₹1180</td>
+                </tr>
+            </tfoot>
+        </table>
+        <button onclick="addRow()">Add Item</button>
+        <p><strong>Total Amount in Words:</strong> <span id="totalInWords">One Thousand One Hundred Eighty Rupees Only</span></p>
+        <button onclick="previewInvoice()">Preview Invoice</button>
+        <button id="printButton" onclick="printInvoice()">Print Invoice</button>
+        
+        <strong style="color: red; text-align: center; display: block;">"This is a computer-generated PDF, No signatures are required."</strong>
+        <h3>Terms & Conditions</h3>
+        <ul>
+            <li>GST is included in the total bill as per applicable rates.</li>
+            <li>Delivery charges, if applicable, are non-refundable.</li>
+            <li>Service charges, if applicable, are optional and may be levied separately.</li>
+            <li>The restaurant ensures food quality but is not liable for taste preferences.</li>
+            <li>Customers must inform about allergies before placing orders.</li>
+            <li>Any disputes shall be subject to the GWALIOR jurisdiction.</li>
+            <li>Any issues with the invoice must be reported within 24 hours.</li>
+        </ul>
+    </div>
+    <script>
+        // Add your JavaScript functions here
+        function addRow() {
+            const row = `<tr>
+                <td contenteditable="true">New Item</td>
+                <td contenteditable="true" oninput="calculateInvoice()">1</td>
+                <td contenteditable="true" oninput="calculateInvoice()">₹100</td>
+                <td>₹0</td>
+                <td class="action-col">
+                    <button onclick="deleteRow(this)">Delete</button>
+                </td>
+            </tr>`;
+            document.getElementById("invoiceBody").insertAdjacentHTML("beforeend", row);
+            calculateInvoice();
+        }
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            calculateInvoice();
+        }
+
+        function calculateInvoice() {
+            const rows = document.querySelectorAll("#invoiceBody tr");
+            let subtotal = 0;
+
+            rows.forEach(row => {
+                const qtyText = row.cells[1].innerText.replace(/[^\d.-]/g, "");
+                const rateText = row.cells[2].innerText.replace(/[^\d.-]/g, "");
+                let qty = parseFloat(qtyText) || 0;
+                let rate = parseFloat(rateText) || 0;
+                let amount = qty * rate;
+
+                row.cells[3].innerText = "₹" + amount.toFixed(2);
+                subtotal += amount;
+            });
+
+            let gstRate = parseFloat(document.getElementById("gstRate").value) || 0;
+            let cgst = (subtotal * (gstRate / 2)) / 100;
+            let sgst = (subtotal * (gstRate / 2)) / 100;
+            let total = subtotal + cgst + sgst;
+
+            document.getElementById("cgstRate").innerText = gstRate / 2 + "%";
+            document.getElementById("sgstRate").innerText = gstRate / 2 + "%";
+            document.getElementById("subTotal").innerText = "₹" + subtotal.toFixed(2);
+            document.getElementById("cgst").innerText = "₹" + cgst.toFixed(2);
+            document.getElementById("sgst").innerText = "₹" + sgst.toFixed(2);
+            document.getElementById("totalAmount").innerText = "₹" + total.toFixed(2);
+            document.getElementById("totalInWords").innerText = numberToWords(Math.round(total)) + " Rupees Only";
+
+            let paymentMode = document.getElementById("paymentMode").value;
+            let chequeMsg = document.getElementById("chequeMessage");
+            chequeMsg.style.display = paymentMode === "Cheque" ? "inline" : "none";
+        }
+
+        function numberToWords(num) {
+            // Function to convert numbers to words
+            // Implementation omitted for brevity
+        }
+
+        function previewInvoice() {
+            document.getElementById("printButton").style.display = "block";
+        }
+
+        function printInvoice() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

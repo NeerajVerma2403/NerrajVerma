@@ -1,0 +1,29 @@
+<script>
+    var i=1
+    function call()
+    {
+        var file=`${i}.png`
+        cat.src=file
+        i++
+        if(i==7)
+        {
+            i=1
+        }
+    }
+    function start()
+    {
+        it=setInterval(call,200)
+    }
+    function stop()
+    {
+        clearInterval(it)
+    }
+
+</script>
+<html>
+    <input type="button" value="Start" onclick="start()">
+    <input type="button" value="Stop" onclick="stop()"><br><br><br><br>
+    <center>
+        <img id="cat" height="200" width="200">
+    </center>
+</html>

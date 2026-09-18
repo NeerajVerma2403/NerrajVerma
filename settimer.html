@@ -1,0 +1,42 @@
+<script>
+    var it
+    var i=10
+    function call()
+    {
+        var t=new Date
+        var cd=`<h2>${t.setHours()}:${t.setMinutes()}:${t.setSeconds()}:${t.setMilliseconds()}</h2>`
+        i--
+        var a
+        if(i==5)
+        {
+            a='Save Your Work'
+            alert(a)
+        }
+        else if(i==0)
+        {
+            i=1
+            a='Time End'
+            alert(a)
+        }
+        result.innerHTML=i
+    }
+    function start()
+    {
+        it=setInterval(call,1000)
+    }
+    function stop()
+    {
+        clearInterval(it)
+    }
+
+</script>
+<html>
+    <input type="button" value="Start" onclick="start()">
+    <input type="button" value="Stop" onclick="stop()">
+    <input type="button" value="Save" onclick="save()"><br><br><br><br>
+    <center>
+        <h1>
+            <div id="result"></div>
+        </h1>
+    </center>
+</html>

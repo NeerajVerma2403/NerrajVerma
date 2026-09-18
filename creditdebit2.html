@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing Software</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
+        th { background-color: #f4f4f4; }
+        button { padding: 8px 16px; margin-top: 10px; }
+        @media print {
+            button { display: none; }
+            input { display: none; }
+            select { display: none; }
+        }
+    </style>
+    <script>
+        let items = [];
+
+        function addItem() {
+        const name = document.getElementById("itemName").value;
+        const quantity = parseInt(document.getElementById("itemQuantity").value);
+        const price = parseFloat(document.getElementById("itemPrice").value);
+        const type = document.getElementById("itemType").value;
+
+        if (name && quantity && price) {
+            const amount = (type === "debit" ? -1 : 1) * price * quantity;
+            const itemData = { name, quantity, price, type, amount };
+
+            google.script.run
+                .withSuccessHandler(() => alert("Item saved successfully!"))
+                .saveBill(itemData);
+
+            clearInputs();
+        } else {
+            alert("Please fill all fields correctly.");
+        }
+    }
+
+        function clearInputs() {
+            document.getElementById("itemName").value = "";
+            document.getElementById("itemQuantity").value = "";
+            document.getElementById("itemPrice").value = "";
+            document.getElementById("itemType").value = "credit";
+        }
+
+        function numberToWords(num) {
+            const a = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+            const b = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+            if (num === 0) return "Zero";
+            if (num < 20) return a[num];
+            if (num < 100) return b[Math.floor(num / 10)] + " " + a[num % 10];
+            if (num < 1000) return a[Math.floor(num / 100)] + " Hundred " + (num % 100 !== 0 ? numberToWords(num % 100) : "");
+            if (num < 100000) return numberToWords(Math.floor(num / 1000)) + " Thousand " + (num % 1000 !== 0 ? numberToWords(num % 1000) : "");
+            if (num < 10000000) return numberToWords(Math.floor(num / 100000)) + " Lakh " + (num % 100000 !== 0 ? numberToWords(num % 100000) : "");
+            return numberToWords(Math.floor(num / 10000000)) + " Crore " + (num % 10000000 !== 0 ? numberToWords(num % 10000000) : "");
+        }
+
+        function renderTable() {
+    const table = document.getElementById("billingTable");
+    const totalInWords = document.getElementById("totalInWords");
+    table.innerHTML = "";
+    let total = 0;
+
+    items.forEach((item, index) => {
+        const amount = item.quantity * Math.abs(item.price);
+        total += item.price * item.quantity;
+        table.innerHTML += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.quantity} Qty</td>
+            <td>${item.type.toUpperCase()}</td>
+            <td>₹ ${Math.abs(item.price).toFixed(2)}</td>
+            <td>₹ ${(item.price * item.quantity).toFixed(2)}</td>
+            <td>₹ ${total.toFixed(2)}</td> <!-- New column for total -->
+        </tr>`;
+    });
+
+    // Add total in a separate row at the bottom
+    table.innerHTML += `<tr>
+        <td colspan="5" style="text-align:right;"><strong>Total</strong></td>
+        <td><strong>₹ ${total.toFixed(2)}</strong></td>
+        <td></td> <!-- Empty cell for the new total column -->
+    </tr>`;
+    
+    const totalType = total >= 0 ? "<strong>(CREDIT)</strong>" : "<strong>(DEBIT)</strong>";
+    totalInWords.innerHTML = "Total in Words: " + numberToWords(Math.abs(total)) + " " + totalType;
+}
+
+function addItem() {
+        const name = document.getElementById("itemName").value;
+        const quantity = parseInt(document.getElementById("itemQuantity").value);
+        const price = parseFloat(document.getElementById("itemPrice").value);
+        const type = document.getElementById("itemType").value;
+
+        if (name && quantity && price) {
+            const amount = type === "debit" ? -price : price;
+            const itemData = { name, quantity, price: amount, type, amount: (amount * quantity).toFixed(2) };
+
+            google.script.run
+                .withSuccessHandler(() => alert("Item saved successfully!"))
+                .saveBill(itemData);
+
+            items.push(itemData);
+            renderTable();
+            clearInputs();
+        } else {
+            alert("Please fill all fields correctly.");
+        }
+    }
+    </script>
+</head>
+<body>
+    <h2>Billing Software</h2>
+    <input type="text" id="itemName" placeholder="Item Name" />
+    <input type="number" id="itemQuantity" placeholder="Quantity" />
+    <input type="number" id="itemPrice" placeholder="Price" step="0.01" />
+    <select id="itemType">
+        <option value="credit">Credit (Addition)</option>
+        <option value="debit">Debit (Subtraction)</option>
+    </select>
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="printBill()">Print Bill</button>
+    <table>
+        <thead>
+            <th>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Quantity (Qty)</th>
+                <th>Type</th>
+                <th>Price (₹)</th>
+                <th>Amount (₹)</th>
+                <th>Total (₹)</th> <!-- New header for total -->
+            </th>
+        </thead>
+        <tbody id="billingTable"></tbody>
+    </table>    
+    <p id="totalInWords"></p>
+</body>
+</html>

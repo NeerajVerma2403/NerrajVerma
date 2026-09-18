@@ -1,0 +1,28 @@
+<script>
+    function disableButton()
+    {
+        btn.disabled=true
+    }
+    function call()
+    {
+        im.width=18
+        var a=parseInt(age.value)
+        if(a>=25 && a<=50)
+        {
+            im.src="right.png" 
+            btn.disabled=false
+        }
+        else
+        {
+            im.src="wrong.png"
+            btn.disabled=true
+        }
+    }
+</script>
+<html>
+    <body onload="disableButton()">
+        <input type="text" id="age" placeholder="Enter Age" onkeyup="call()">
+        <span><img id="im"></span><br><br>
+        <input type="button" value="Save" id="btn">
+    </body>
+</html>

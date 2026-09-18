@@ -1,0 +1,96 @@
+<!-- full time -->
+
+<!-- <script>
+    function call()
+    {
+        var t=new Date()
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- for month -->
+
+<!-- <script>
+    function call()
+    {
+        var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        var t=new Date()
+        console.log(t.getMonth())
+        console.log(m[t.getMonth()])
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        var w=['Sun','Mon','Tue','Wed','Thur','Fri','Sat']
+        var t=new Date()
+        console.log(t.getMonth())
+        console.log(m[t.getMonth()])
+        console.log(t.getDate())
+        console.log(t.getFullYear())
+        console.log(t.getDay())
+        console.log(w[t.getDay()])
+        console.log(t.getHours())
+        console.log(t.getSeconds())
+        console.log(t.getMinutes())
+        console.log(t.getMilliseconds())
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        var w=['Sun','Mon','Tue','Wed','Thur','Fri','Sat']
+        var t=new Date()
+        var cd=`<h1>${w[t.getDay()]}-${t.getDate()}-${m[t.getMonth()]}-${t.getFullYear()}</h1>`
+        cd+=`<h2>${t.getHours()}:${t.getMinutes()}:${t.getSeconds()}:${t.getMilliseconds()}</h2>`
+        result.innerHTML=cd
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()"><br><br><br><br>
+    <center>
+        <div id="result"></div>
+    </center>
+</html> -->
+
+<!-- <script>
+    var it
+    function call()
+    {
+        var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        var w=['Sun','Mon','Tue','Wed','Thur','Fri','Sat']
+        var t=new Date()
+        var cd=`<h1>${w[t.getDay()]}-${t.getDate()}-${m[t.getMonth()]}-${t.getFullYear()}</h1>`
+        cd+=`<h2>${t.getHours()}:${t.getMinutes()}:${t.getSeconds()}</h2>`
+        result.innerHTML=cd
+    }
+    function start()
+    {
+        it=setInterval(call,1000)
+    }
+    function stop()
+    {
+        clearInterval(it)
+    }
+
+</script>
+<html>
+    <input type="button" value="Start" onclick="start()">
+    <input type="button" value="Stop" onclick="stop()"><br><br><br><br>
+    <center>
+        <div id="result"></div>
+    </center>
+</html> -->

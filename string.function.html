@@ -1,0 +1,436 @@
+<!-- charAt -->
+
+<!-- <script>
+    function call()
+    {
+        var k='India'
+        t=k.charAt(3)
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- charCodeAt -->
+
+<!-- <script>
+    function call()
+    {
+        var k='India'
+        t=k.charCodeAt(2)
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- concat -->
+
+<!-- <script>
+    function call()
+    {
+        var k="Harry"
+        var j="Singh"
+        var m="Where"
+        var t=k.concat(" ",j," ",m," ","are you ?")
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- endsWith -->
+
+<!-- <script>
+    function call()
+    {
+        var k="Singapore"
+        t=k.endsWith('pore')
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var std=['Ravi Kumar','Harry Singh','Peter Sharma','Tony Singh','Thomas Singh']
+        for(i=0;i<std.length;i++)
+        {
+            if(std[i].endsWith('Singh'))
+            {console.log(std[i])}
+        }
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- startsWith -->
+
+<!-- <script>
+    function call()
+    {
+        var std=['Ravi Kumar','Harry Singh','Peter Sharma','Harry Sharma','Thomas Singh']
+        for(i=0;i<std.length;i++)
+        {
+            if(std[i].startsWith('Harry'))
+            {console.log(std[i])}
+        }
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- include -->
+
+<!-- <script>
+    function call()
+    {
+        var std=['Ravi Kumar','Harry Singh','Peter Sharma','Tony Singh','Thonas Singh']
+        for(i=0;i<std.length;i++)
+        {
+            if(std[i].includes('on'))
+            {console.log(std[i])}
+        }
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- fromCharCode -->
+
+<!-- <script>
+    function call()
+    {
+        var t=String.fromCharCode(67,89,90.56,25,83)
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- indexOf -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var t=x.indexOf("the")
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var t=x.indexOf("those")//-1
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var t=x.indexOf("the",4)//position
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- substring -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var k=x.substring(5,10)
+        console.log(k)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- slice -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var k=x.slice(4,10)
+        console.log(k)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- split -->
+
+<!-- <script>
+    function call()
+    {
+        var x="Vijay Ajay Pankaj Harry Vishal"
+        var t=x.split(" ")
+        console.log(t[0])
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- lastindexof -->
+
+<!-- <script>
+    function call()
+    {
+        var x="the man the machine the js"
+        var t=x.lastIndexOf('the')
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- practice -->
+
+<!-- <script>
+    function call()
+    {
+        var x="Deep Prasad Sharma"
+        var t=x.substring(x.indexOf(' ')+1,x.lastIndexOf(' '))
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x="9109747086"
+        var t=`******${x.substring(6)}`
+        console.log(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        var x="Taj is [in] Agra. [Red] Fort is [Also] in Agra"
+        i=x.indexOf('[')
+        j=x.indexOf(']',i+1)
+        word=x.substring(i+1,j)
+        console.log(word)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- normalize -->
+
+<!-- <script>
+    function call()
+    {
+        x="\u0928\u0940\u0930\u091C".normalize();
+        alert(x)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- padEnd -->
+
+<!-- <script>
+    function call()
+    {
+        x="Agra"
+        var t=x.padEnd(10,'*')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        x="9109747086"
+        var t=x.substr(0,4).padEnd(10,'*')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- padStart -->
+
+<!-- <script>
+    function call()
+    {
+        x="9109747086"
+        var t=x.substr(6).padStart(10,'*')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- repeat -->
+
+<!-- <script>
+    function call()
+    {
+        x="9109747086"
+        var t=x.repeat(3)
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- replace -->
+
+<!-- <script>
+    function call()
+    {
+        x="the man the machine the js"
+        var t=x.replace('the','that')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- replaceAll -->
+
+<!-- <script>
+    function call()
+    {
+        x="the man the machine the js"
+        var t=x.replaceAll('the','that')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- <script>
+    function call()
+    {
+        x="the man the machine the js"
+        var t=x.replace('the','that')
+        var t=t.replace('the','that')
+        var t=t.replace('that','the')
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- toLowerCase -->
+
+<!-- <script>
+    function call()
+    {
+        x="NEERAJ VERMA"
+        var t=x.toLowerCase()
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- toUpperCase -->
+
+<!-- <script>
+    function call()
+    {
+        x="neeraj verma"
+        var t=x.toUpperCase()
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- trim -->
+
+<!-- <script>
+    function call()
+    {
+        x="         Neeraj Verma                "
+        alert(x)
+        t=x.trim()
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- trimStart -->
+
+<!-- <script>
+    function call()
+    {
+        x="         Neeraj Verma                "
+        alert(x)
+        t=x.trimStart()
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->
+
+<!-- trimEnd -->
+
+<!-- <script>
+    function call()
+    {
+        x="         Neeraj Verma                "
+        alert(x)
+        t=x.trimEnd()
+        alert(t)
+    }
+</script>
+<html>
+    <input type="button" value="Click Here" onclick="call()">
+</html> -->

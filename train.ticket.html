@@ -1,0 +1,160 @@
+<script src="train.ticket.js"></script>
+<html>
+    <center> 
+        <caption><h2>Indian Railway</h2></caption>
+
+<table width="20%"> 
+    <tr>
+        <b>Starting Place: </b>
+
+        <select id="sp">
+            <option>Select City:</option>
+            <option>Gwalior</option>
+            <option>Agra</option>
+            <option>Mathura</option>  
+            <option>Delhi</option>
+        </select>
+    </tr><br><br>
+
+    <tr>
+        <b>Ending Place: </b> 
+        <select id="ep">
+            <option>Select City</option>
+            <option>Agra</option>
+            <option>Mathura</option> 
+            <option>Delhi</option>
+            <option>Gwalior</option>    
+        </select>
+    </tr><br><br>
+
+    <tr>
+        <b>Train Name</b> 
+            <select id="tn">
+                <option> select</option>
+                <option>MahaKausal Express</option>
+                <option>Rajdhani Express</option>  
+            </select>
+    </tr>
+
+    <tr>
+        <td>
+            <b>Date</b>
+        </td>
+        <td>
+            <input type="date" id="date" name="date">
+        </td>  
+    </tr>
+    
+    <tr>
+        <td>
+            <b>Distance</b>
+        </td>
+        
+        <td>
+            <input type="text" id="text" name="text">
+        </td>  
+    </tr>
+</table > 
+
+<caption><h3>Passenger Details</h3></caption>
+
+<table cellspacing="0" border="1" width="50%" cellpadding="5">
+
+    <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Birth Type</th>
+    </tr>
+
+    <tr>
+        <td>
+            1
+        </td>
+        <td>
+            <input type="text" id="name1" name="name1">
+        </td>
+        <td>
+            <input type="text" id="age1" name="age1">
+        </td>
+        <td>
+            <select id="gender1">
+                <option>Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </td>
+        <td>
+            <select id="birthtype1">
+                <option>Select</option>
+                <option>18-</option>
+                <option>18</option>
+                <option>18+</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            2
+        </td>
+        <td>
+            <input type="text" id="name2" name="name2">
+        </td>
+        <td>
+            <input type="text" id="age2" name="age2">
+        </td>
+        <td>
+            <select id="gender2">
+                <option>Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </td>
+        <td>
+            <select id="birthtype2">
+                <option>Select</option>
+                <option>18-</option>
+                <option>18</option>
+                <option>18+</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            3
+        </td>
+        <td>
+            <input type="text" id="name3" name="name3">
+        </td>
+        <td>
+            <input type="text" id="age3" name="age3">
+        </td>
+        <td>
+            <select id="gender3">
+                <option>Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </td>
+        <td>
+            <select id="birthtype3">
+                <option>Select</option>
+                <option>18-</option>
+                <option>18</option>
+                <option>18+</option>
+            </select>
+        </td>
+    </tr>
+        
+</table><br><br>
+      
+<input type="button" value="Submit" onclick="call()">
+
+<div id="result"></div>
+
+</center>
+</html>

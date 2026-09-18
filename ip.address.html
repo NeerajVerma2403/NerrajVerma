@@ -1,0 +1,32 @@
+<script>
+    function call()
+    {
+        var t=text.value
+        var l=t.count(".")
+        if(l!=4)
+        {error=true}
+        else
+        {
+            var x=t.split(".")
+            for(i=0;i<x.lenght;i++)
+            {
+                if(!(x[i].lenght>=1 && x[i].lenght<=3))
+                {error=true
+                    break
+                }
+            }
+            if(error=true)
+            {
+                im.src="right.png"
+            }
+            else
+            {
+                im.src="wrong.png"
+            }
+        }
+    }
+</script>
+<html>
+    <input type="text" id="text" placeholder="Enter IP Address" onkeyup="call()">
+    <img id="im">
+</html>

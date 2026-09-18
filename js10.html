@@ -1,0 +1,67 @@
+<script>
+    function netSalary()
+    {
+        var a=parseInt(bs.value)
+        var da=0
+        var hra=0
+        var pf=0
+
+        if(grade.value==Grade1)
+        {
+            var da1=56
+            var hra1=16
+            var pf1=12
+        }
+
+        var daamt1=bs.value*56/100
+        var hraamt1=bs.value*16/100
+        var pfamt1=bs.value*12/100
+
+        else if(grade.value==Grade2)
+        {
+            var da2=45
+            var hra2=10
+            var pf2=12
+        }
+
+        else if(grade.value==Grade3)
+        {
+            var da3=35
+            var hra3=8
+            var pf3=12
+        }
+
+        else if(grade.value==Grade4)
+        {
+            var da4=20
+            var hra4=8
+            var pf4=12
+        }
+
+        
+    }
+
+</script>
+
+<html>
+    <select id="grade">
+        <option>-Select Grade-</option>
+        <option>Grade1</option>
+        <option>Grade2</option>
+        <option>Grade3</option>
+        <option>Grade4</option>
+    </select><br><br>
+
+    <input placeholder="Enter Your Basic Salary" type="text" id="bs"><br><br>
+    <input type="button" value="Net Salary" onclick="netSalary()"><br><br>
+
+    <b>DA</b>
+    <span id="da"></span><br><br>
+
+    <b>HRA</b>
+    <span id="hr"></span><br><br>
+
+    <b>PF</b>
+    <span id="pf"></span><br><br>
+
+</html>

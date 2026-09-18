@@ -1,0 +1,57 @@
+<script>
+    function getAmount()
+    {
+        var a=rate.value*qty.value
+
+        amt.innerHTML="&#8377;"+a
+    }
+
+    function getDiscount()
+    {
+        var a=rate.value*qty.value
+        var disvalue=0
+
+        if(a>=10000 && a<=49999)
+        {
+            disvalue=5
+
+        }
+
+        else if (a>=50000 && a<200000)
+        {
+            disvalue=10
+
+        }
+
+        else if (a>=200000)
+        {
+            disvalue=15
+
+        }
+        var d=a*disvalue/100
+        dis.innerHTML=disvalue+"%"
+        disamt.innerHTML="&#8377;"+d
+        var ta=a-d
+        na.innerHTML="&#8377;"+ta
+    }
+
+</script>
+
+<html>
+<input type="text" id="rate" placeholder="Enter Rate"><br><br>
+<input type="text" id="qty" placeholder="Enter Quantity"><br><br>
+<input type="button" value="Amount" onclick="getAmount()">
+<input type="button" value="Discount(10%)" onclick="getDiscount()"><br><br>
+<b>Amount:</b>
+<span id="amt"></span><br><br>
+
+<b>Discount:</b>
+<span id="dis"></span><br><br>
+
+<b>Discount Amount:</b>
+<span id="disamt"></span><br><br>
+
+<b>Net Amount:</b>
+<span id="na"></span><br><br>
+
+</html>

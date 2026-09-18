@@ -1,0 +1,29 @@
+<script>
+    function test()
+    {
+        result.innerHTML=pizza.value
+        var im=`${pizza.value}.png`
+        pizzaimage.src=im
+    }
+
+</script>
+
+<html>
+    <select id="pizza">
+        <option>-Select Pizza-</option>
+        <option>Neapolitan Pizza</option>
+        <option>New York Style Pizza</option>
+        <option>Chicago Deep-Dish Pizza</option>
+        <option>Margherita Pizza</option>
+        <option>Sicilian Pizza</option>
+        <option>Hawaiian Pizza</option>
+        <option>California Pizza</option>
+        <option>Greek Pizza</option>
+        <option>Detroit Style Pizza</option>
+        <option>Tavern Style Pizza</option>
+    </select><br><br>
+    <input type="button" value="Click Here" onclick="test()"><br><br>
+    <div id="result">See Here....</div><br><br>
+    <img id="pizzaimage">
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      // When counter is selected → load menu items
+      function loadMenu() {
+        var counter = document.getElementById("counter").value;
+        if (!counter) return;
+        
+        google.script.run.withSuccessHandler(function(items) {
+          var menu = document.getElementById("menu");
+          menu.innerHTML = "<option value=''>Select Dish</option>";
+          items.forEach(function(item) {
+            var opt = document.createElement("option");
+            opt.value = item.name;
+            opt.setAttribute("data-price", item.price);
+            opt.textContent = item.name + " - ₹" + item.price;
+            menu.appendChild(opt);
+          });
+        }).getMenuItems(counter);
+      }
+
+      // Show total when dish selected
+      function calculateTotal() {
+        var menu = document.getElementById("menu");
+        if (!menu.value) return;
+        var price = parseFloat(menu.options[menu.selectedIndex].getAttribute("data-price"));
+        var subtotal = price;
+        var gst = subtotal * 0.05;
+        var total = subtotal + gst;
+        document.getElementById("subtotal").innerText = "₹" + subtotal;
+        document.getElementById("gst").innerText = "₹" + gst.toFixed(2);
+        document.getElementById("total").innerText = "₹" + total.toFixed(2);
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Food Order</h3>
+
+    <!-- Counter Dropdown -->
+    <label>Counter:</label>
+    <select id="counter" onchange="loadMenu()">
+      <option value="">Select Counter</option>
+      <option value="1">Counter 1</option>
+      <option value="2">Counter 2</option>
+      <option value="3">Counter 3</option>
+    </select>
+    <br><br>
+
+    <!-- Menu Dropdown -->
+    <label>Menu:</label>
+    <select id="menu" onchange="calculateTotal()">
+      <option value="">Select Dish</option>
+    </select>
+    <br><br>
+
+    <p>Subtotal: <span id="subtotal">₹0</span></p>
+    <p>GST (5%): <span id="gst">₹0</span></p>
+    <p>Total: <span id="total">₹0</span></p>
+  </body>
+</html>

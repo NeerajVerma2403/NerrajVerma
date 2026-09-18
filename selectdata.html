@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficiary Payment Form</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .beneficiary-selector {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-section {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .mandatory::after {
+            content: " *";
+            color: var(--accent);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .readonly {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        
+        .form-col {
+            flex: 1;
+            padding: 0 10px;
+            min-width: 200px;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .required-note {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        .required-note::before {
+            content: "* ";
+            color: var(--accent);
+        }
+        
+        .beneficiary-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .beneficiary-card:hover {
+            background: #dfe6e9;
+            transform: translateX(5px);
+        }
+        
+        .beneficiary-card.active {
+            background: #d6eaf8;
+            border-left-color: var(--accent);
+        }
+        
+        .beneficiary-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .beneficiary-details {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .auto-fill-notice {
+            background: #e8f4fc;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .auto-fill-notice i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-col {
+                flex: 100%;
+            }
+            
+            .beneficiary-selector, .form-section {
+                flex: 100%;
+            }
+            
+            .form-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Beneficiary Payment Form</h1>
+            <p class="subtitle">Fill payment details quickly with our auto-fill feature</p>
+        </header>
+        
+        <div class="form-container">
+            <div class="beneficiary-selector">
+                <h2 class="section-title">Select Beneficiary</h2>
+                
+                <div class="auto-fill-notice">
+                    <i>ℹ️</i>
+                    <span>Select a beneficiary to auto-fill the form</span>
+                </div>
+                
+                <div class="beneficiary-list" id="beneficiaryList">
+                    <!-- Beneficiary cards will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="tabs">
+                    <div class="tab active" data-tab="basic">Basic Details</div>
+                    <div class="tab" data-tab="additional">Additional Information</div>
+                </div>
+                
+                <form id="paymentForm">
+                    <div class="tab-content active" id="basic-tab">
+                        <div class="form-group">
+                            <label for="beneficiaryName" class="mandatory">Beneficiary Name</label>
+                            <select id="beneficiaryName" required>
+                                <option value="">-- Select Beneficiary --</option>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="debitAccountNumber" class="mandatory">Debit Account Number</label>
+                                    <input type="text" id="debitAccountNumber" required readonly class="readonly">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="transactionAmount" class="mandatory">Transaction Amount</label>
+                                    <input type="number" id="transactionAmount" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="transactionCurrency">Transaction Currency</label>
+                                    <input type="text" id="transactionCurrency" value="INR" readonly class="readonly">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryAccountNumber" class="mandatory">Beneficiary Account Number</label>
+                                    <input type="text" id="beneficiaryAccountNumber" required readonly class="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryIFSCCode" class="mandatory">Beneficiary IFSC Code</label>
+                                    <input type="text" id="beneficiaryIFSCCode" required readonly class="readonly">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="transactionDate" class="mandatory">Transaction Date</label>
+                                    <input type="date" id="transactionDate" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="paymentMode" class="mandatory">Payment Mode</label>
+                                    <select id="paymentMode" required>
+                                        <option value="">-- Select Payment Mode --</option>
+                                        <option value="NEFT">NEFT</option>
+                                        <option value="RTGS">RTGS</option>
+                                        <option value="IMPS">IMPS</option>
+                                        <option value="UPI">UPI</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="customerReferenceNumber" class="mandatory">Customer Reference Number</label>
+                                    <input type="text" id="customerReferenceNumber" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryNickname" class="mandatory">Beneficiary Nickname/Code</label>
+                                    <input type="text" id="beneficiaryNickname" required readonly class="readonly">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryMobileNumber">Beneficiary Mobile Number</label>
+                                    <input type="tel" id="beneficiaryMobileNumber" readonly class="readonly">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="additional-tab">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="bankAccountType">Bank Account Type</label>
+                                    <select id="bankAccountType">
+                                        <option value="">-- Select Account Type --</option>
+                                        <option value="Savings">Savings</option>
+                                        <option value="Current">Current</option>
+                                        <option value="OD">OD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryType">Beneficiary Type</label>
+                                    <select id="beneficiaryType">
+                                        <option value="">-- Select Type --</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="debitNarration">Debit Narration</label>
+                                    <input type="text" id="debitNarration">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="creditNarration">Credit Narration</label>
+                                    <input type="text" id="creditNarration">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="invoiceNumber">Invoice Number</label>
+                            <input type="text" id="invoiceNumber">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="beneficiaryAddress1">Beneficiary Address</label>
+                            <input type="text" id="beneficiaryAddress1" placeholder="Address Line 1">
+                            <input type="text" id="beneficiaryAddress2" placeholder="Address Line 2" style="margin-top: 8px;">
+                            <input type="text" id="beneficiaryAddress3" placeholder="Address Line 3" style="margin-top: 8px;">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryCity">Beneficiary City</label>
+                                    <input type="text" id="beneficiaryCity">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryState">Beneficiary State</label>
+                                    <input type="text" id="beneficiaryState">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryPinCode">Pin Code</label>
+                                    <input type="text" id="beneficiaryPinCode">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryEmail1">Email Address 1</label>
+                                    <input type="email" id="beneficiaryEmail1">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="beneficiaryEmail2">Email Address 2</label>
+                                    <input type="email" id="beneficiaryEmail2">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="addInfo1">Additional Info 1</label>
+                                    <input type="text" id="addInfo1">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="addInfo2">Additional Info 2</label>
+                                    <input type="text" id="addInfo2">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="addInfo3">Additional Info 3</label>
+                                    <input type="text" id="addInfo3">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="addInfo4">Additional Info 4</label>
+                                    <input type="text" id="addInfo4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="required-note">Mandatory Fields</div>
+                        <button type="submit">Submit Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample beneficiary data
+        const beneficiaryData = [
+            {
+                name: "Zakir Hotel Kebab Wale",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "50601000052230",
+                beneficiaryIFSCCode: "BARB0GWALIO",
+                beneficiaryNickname: "Zakir Qureshi",
+                beneficiaryMobileNumber: "9826937084"
+            },
+            {
+                name: "Pizza Stop Café Vinay Nagar",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "20048795015",
+                beneficiaryIFSCCode: "SBIN0000377",
+                beneficiaryNickname: "Ankur Shinde",
+                beneficiaryMobileNumber: "9691794059"
+            },
+            {
+                name: "Ashok Hotel",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "52209420900",
+                beneficiaryIFSCCode: "SBIN0020855",
+                beneficiaryNickname: "Sunil Gaud",
+                beneficiaryMobileNumber: "9302904452"
+            },
+            {
+                name: "Hide and Seek Café",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "44113553291",
+                beneficiaryIFSCCode: "SBIN0000377",
+                beneficiaryNickname: "Ritesh Prajapati",
+                beneficiaryMobileNumber: "9589324866"
+            },
+            {
+                name: "The Noodles Co.",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "50200104927162",
+                beneficiaryIFSCCode: "HDFC0003661",
+                beneficiaryNickname: "Yatendra Modi",
+                beneficiaryMobileNumber: "9098595828"
+            },
+            {
+                name: "The Road Chef",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "905410110001055",
+                beneficiaryIFSCCode: "BKID0009054",
+                beneficiaryNickname: "Arvind Upadhya",
+                beneficiaryMobileNumber: "9039418226"
+            },
+            {
+                name: "Mashoom Ratlami Sev Bhandar",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "9179961261",
+                beneficiaryIFSCCode: "KKBK0005949",
+                beneficiaryNickname: "Deelip Sharma",
+                beneficiaryMobileNumber: "9179961261"
+            },
+            {
+                name: "Burger Buddy Inderganj",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "50200099595381",
+                beneficiaryIFSCCode: "HDFC0004676",
+                beneficiaryNickname: "Sachin Pathak",
+                beneficiaryMobileNumber: "8717879758"
+            },
+            {
+                name: "Zam Zam 65 Chicken Corner",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "5585310703",
+                beneficiaryIFSCCode: "CBIN0283189",
+                beneficiaryNickname: "Anish Khan",
+                beneficiaryMobileNumber: "7828705355"
+            },
+            {
+                name: "Karnataka Café",
+                debitAccountNumber: "925020041864067",
+                transactionCurrency: "INR",
+                beneficiaryAccountNumber: "50200107457551",
+                beneficiaryIFSCCode: "HDFC0004676",
+                beneficiaryNickname: "Akash Dixit",
+                beneficiaryMobileNumber: "9201535245"
+            }
+        ];
+
+        // DOM elements
+        const beneficiarySelect = document.getElementById('beneficiaryName');
+        const beneficiaryList = document.getElementById('beneficiaryList');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Initialize the form
+        function initForm() {
+            // Populate beneficiary dropdown
+            beneficiaryData.forEach(beneficiary => {
+                const option = document.createElement('option');
+                option.value = beneficiary.name;
+                option.textContent = beneficiary.name;
+                beneficiarySelect.appendChild(option);
+            });
+
+            // Create beneficiary cards
+            beneficiaryData.forEach((beneficiary, index) => {
+                const card = document.createElement('div');
+                card.className = 'beneficiary-card';
+                card.dataset.index = index;
+                
+                card.innerHTML = `
+                    <div class="beneficiary-name">${beneficiary.name}</div>
+                    <div class="beneficiary-details">
+                        Account: ${beneficiary.beneficiaryAccountNumber} | IFSC: ${beneficiary.beneficiaryIFSCCode}
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    // Remove active class from all cards
+                    document.querySelectorAll('.beneficiary-card').forEach(c => c.classList.remove('active'));
+                    // Add active class to clicked card
+                    card.classList.add('active');
+                    // Select the beneficiary in dropdown
+                    beneficiarySelect.value = beneficiary.name;
+                    // Auto-fill the form
+                    autoFillForm(beneficiary);
+                });
+                
+                beneficiaryList.appendChild(card);
+            });
+
+            // Set today's date as default transaction date
+            document.getElementById('transactionDate').valueAsDate = new Date();
+
+            // Auto-fill form when beneficiary is selected from dropdown
+            beneficiarySelect.addEventListener('change', function() {
+                const selectedBeneficiary = beneficiaryData.find(b => b.name === this.value);
+                
+                if (selectedBeneficiary) {
+                    autoFillForm(selectedBeneficiary);
+                    
+                    // Update active card
+                    document.querySelectorAll('.beneficiary-card').forEach(card => {
+                        if (card.dataset.index == beneficiaryData.indexOf(selectedBeneficiary)) {
+                            card.classList.add('active');
+                        } else {
+                            card.classList.remove('active');
+                        }
+                    });
+                }
+            });
+
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-tab`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Auto-fill form with beneficiary data
+        function autoFillForm(beneficiary) {
+            document.getElementById('debitAccountNumber').value = beneficiary.debitAccountNumber;
+            document.getElementById('transactionCurrency').value = beneficiary.transactionCurrency;
+            document.getElementById('beneficiaryAccountNumber').value = beneficiary.beneficiaryAccountNumber;
+            document.getElementById('beneficiaryIFSCCode').value = beneficiary.beneficiaryIFSCCode;
+            document.getElementById('beneficiaryNickname').value = beneficiary.beneficiaryNickname;
+            document.getElementById('beneficiaryMobileNumber').value = beneficiary.beneficiaryMobileNumber;
+            
+            // Visual feedback
+            const form = document.getElementById('paymentForm');
+            form.style.transform = 'scale(1.01)';
+            setTimeout(() => {
+                form.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Form submission handler
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    field.style.borderColor = 'var(--accent)';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (isValid) {
+                // In a real application, you would send the form data to a server here
+                alert('Payment form submitted successfully!');
+                this.reset();
+                document.getElementById('transactionDate').valueAsDate = new Date();
+                document.querySelectorAll('.beneficiary-card').forEach(c => c.classList.remove('active'));
+            } else {
+                alert('Please fill all mandatory fields.');
+            }
+        });
+
+        // Initialize the form when the page loads
+        window.addEventListener('DOMContentLoaded', initForm);
+    </script>
+</body>
+</html>

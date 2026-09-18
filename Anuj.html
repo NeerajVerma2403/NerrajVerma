@@ -1,0 +1,235 @@
+<!-- <html>
+
+    <form action="2.html">
+
+    <table width="30%" border="1px" cellpadding="4px" cellspacing="0px" >
+        <b><font color="green" ><h1>User Interface</h1></font></b>
+        
+        <tr>
+            <td><b>user id:</b></td>
+            <td><input required type="text" placeholder="ID no." name="uid" id="uid"></td>
+        </tr>
+
+        <tr>
+            <td><b>gender:</b></td>
+            <td>
+                <input type="radio" name="gender" id="gender" value="male">Male
+                <input type="radio" name="gender" id="gender" value="female">Female
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>date:</b></td>
+            <td>
+                <input required type="date" name="dob" id="dob">
+                <input required type="time" name="time" id="time">
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>email id:</b></td>
+            <td><input required type="Email" name="email" id="email"></td>
+        </tr>
+
+        <tr>
+            <td><b>interest:</b></td>
+            <td>
+                <input required type="checkbox" name="int" id="int" value="electrical">Electrical
+                <input required type="checkbox" name="int" id="int" value="electronic">Electronic
+                <input required type="checkbox" name="int" id="int" value="security cam">Security Cam
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>adress:</b></td>
+            <td><textarea rows="2" cols="80" name="add" id="add"></textarea></td>
+        </tr>
+
+        <tr>
+            <td><b>state:</b></td>
+            <td>
+                <select name="state" id="state">
+                    <option selected>-select state-</option>
+                    <option value="MP">madhya pradesh</option>
+                    <option value="UP">utterpradesh</option>
+                    <option>andhrepradesh</option>
+                    <option>delhi</option>
+                    <option>punjab</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>picture:</b></td>
+            <td><input required type="file" name="pic" id="pic"></td>
+        </tr>
+
+        <tr>
+            <td><b>password:</b></td>
+            <td><input required type="password" name="pwd" id="pwd"></td>
+        </tr>
+        
+    </table>
+    <input type="submit">
+    <input type="reset">
+
+    </form>
+
+</html> -->
+
+
+
+
+
+
+<!-- <html>
+
+<form action="2.html" method="post">
+
+    <table width="50%">
+        <b><font color="green" ><h1>User Interface</h1></font></b>
+
+        <tr>
+            <td><b>user id:</b></td>
+            <td><input required type="text" placeholder="ID no." name="uid" id="uid"></td>
+        </tr>
+
+        <tr>
+            <td><b>gender:</b></td>
+            <td>
+                <input type="radio" name="gender" id="male" value="male">
+                <label for="male">Male</label>
+                <input type="radio" name="gender" id="female" value="female">
+                <label for="female">Female</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>date:</b></td>
+            <td><input required type="date" name="dob" id="dob"></td>
+            <td><input required type="time" name="time" id="time"></td>
+        </tr>
+
+        <tr>
+            <td><b>email id:</b></td>
+            <td><input required type="email" name="email" id="email"></td>
+        </tr>
+
+        <tr>
+            <td><b>interest:</b></td>
+            <td>
+                <input type="checkbox" name="int[]" id="electrical" value="electrical">
+                <label for="electrical">Electrical</label>
+                <input type="checkbox" name="int[]" id="electronic" value="electronic">
+                <label for="electronic">Electronic</label>
+                <input type="checkbox" name="int[]" id="security" value="security cam">
+                <label for="security">Security Cam</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>address:</b></td>
+            <td><textarea rows="2" cols="80" name="add" id="add"></textarea></td>
+        </tr>
+
+        <tr>
+            <td><b>state:</b></td>
+            <td>
+                <select name="state" id="state">
+                    <option selected>-select state-</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="DL">Delhi</option>
+                    <option value="PB">Punjab</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>picture:</b></td>
+            <td><input type="file" name="pic" id="pic"></td>
+        </tr>
+
+        <tr>
+            <td><b>password:</b></td>
+            <td><input required type="password" name="pwd" id="pwd"></td>
+        </tr>
+        
+    </table>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</form>
+
+</html> -->
+
+
+<html>
+    <script>
+        function add()
+        {
+            var a=parseInt(txt1.value)
+            var b=parseInt(txt2.value)
+            var c=a+b
+            result.innerHTML=("Addition= "+c)
+        }
+        function sub()
+        {
+            var a=parseInt(txt1.value)
+            var b=parseInt(txt2.value)
+            var c=a-b
+            result.innerHTML=("Subtraction= "+c)
+        }
+        function clearAll()
+        {
+            txt1.value=" "
+            txt2.value=" "
+            result.innerHTML="See Here....."
+        }
+    </script>
+
+    <input type="text" id="txt1" size="10%">
+    <input type="text" id="txt2" size="10%">
+    <br>
+    <input type="button" value="Addition" onclick="add()">
+    <input type="button" value="subtraction" onclick="sub()">
+    <input type="button" value="clear all" onclick="clearAll()">
+
+    <div id="result">see result..</div>
+</html>
+
+
+<!-- <script>
+    function call()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        var c=a+b
+        result.innerHTML="Addition:"+c
+    }
+
+    function mul()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        var c=a*b
+        result.innerHTML="Multiple:"+c
+    }
+
+    function clearValue()
+    {
+        text1.value=" "
+        text2.value=" "
+        result.innerHTML="See Here....."
+    }
+</script>
+
+<html>
+    <input placeholder="Enter First Digit" type="text" id="text1"> <br><br>
+    <input placeholder="Enter Second Digit" type="text" id="text2"> <br><br>
+    <input type="button" value="Addition" onclick="call()">
+    <input type="button" value="Multiple" onclick="mul()">
+    <input type="button" value="Clear Screen" onclick="clearValue()"><br>
+    <div id="result">See Here.....</div>
+</html> -->

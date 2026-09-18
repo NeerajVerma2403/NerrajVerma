@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYC Verification API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+    }
+    .description {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .card ul li {
+      margin: 5px 0;
+      color: #333;
+    }
+    .api-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #007bff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .otp-box {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #e9f7f9;
+    }
+    .otp-box p {
+      font-size: 14px;
+      color: #333;
+    }
+    .otp-input {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .otp-input input {
+      width: 45px;
+      height: 45px;
+      text-align: center;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .verify-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>KYC Verification API</h1>
+    <p class="description">
+      Thousands of businesses are generating new customers but are having trouble verifying their identity. Our KYC verification APIs let you streamline the process easily.
+    </p>
+    <div class="card">
+      <h2>Aadhaar Verification API (OTP)</h2>
+      <p>
+        Aadhaar API, you can onboard users at a lightning-fast pace, without worrying about making costly mistakes. Get detailed information on a user by accessing their Aadhaar, checking their mobile number, state, age-band, gender, and many more.
+      </p>
+      <ul>
+        <li>✔ Access information in seconds</li>
+        <li>✔ Ideal for Telecom Industry, Retail Businesses, Fintech Product, Neo Banks etc.</li>
+        <li>✔ Reduce time wasted on complex, manual tasks.</li>
+      </ul>
+      <a href="#" class="api-button">View API Documentation &gt;</a>
+    </div>
+    <div class="otp-box">
+      <p>MESSAGES (UD-ADC012)</p>
+      <p>OTP for Aadhaar (XXXX XXXX 1234) is <strong>125610</strong> and is valid for 30 minutes.</p>
+      <p>Please enter Aadhaar OTP sent to your mobile</p>
+      <div class="otp-input">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+        <input type="text" maxlength="1">
+      </div>
+      <button class="verify-button">Verify</button>
+    </div>
+  </div>
+</body>
+</html>

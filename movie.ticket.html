@@ -1,0 +1,75 @@
+<script src="movie.ticket.js"></script>
+
+<html>
+    <center>
+        <h2>Booking Details</h2>
+        <table>
+            <tr>
+                <td>Movie:</td>
+                <td>
+                    <select id="movie"> 
+                        <option>Select:</option>
+                        <option>Kum Fu Panda 4</option> 
+                        <option>KGF CHAPTER 2</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Threaters:</td>
+                <td>
+                    <select id="threaters"> 
+                        <option>Select:</option>
+                        <option>Threaters Number 1</option> 
+                        <option>Threaters Number 2</option>
+                        <option>Threaters Number 3</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Dates:</td>
+                <td>
+                    <input type="date" id="date" name="date">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Show Time:</td>
+                <td>
+                    <input type="time" id="time" name="time">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <input type="text" placeholder="Enter Your Email" name="email" id="email">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Tickets:</td>
+                <td>
+                    <input type="text" placeholder="Enter Digit" name="ticket" id="ticket">
+                </td>
+            </tr>
+
+            <td>Per Ticket Price:</td>
+                <td>
+                    <input type="text" id="ptp" name="ptp">
+                </td>
+                 
+
+            <tr>
+                <td>Total Price:</td>
+                <td>
+                   <span id="tp"></span>
+                </td>
+            </tr>
+        </table><br>
+
+        <input type="button" value="Book Tickets" onclick="call()">
+        <div id="result"></div>
+    </center>
+</html>

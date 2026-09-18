@@ -1,0 +1,80 @@
+<script>
+    function getBill()
+    {
+        var a=parseInt(cr.value)
+        var b=parseInt(pr.value)
+
+        var c=a-b
+        tr.innerHTML=c+" Units"
+
+        var rupeeperunit=0
+        
+        if(c>=0 && c<=299)
+        {
+            rupeeperunit=0
+        }
+
+        else if(c>=300 && c<=499)
+        {
+            rupeeperunit=5
+        }
+
+        else if(c>=500 && c<=999)
+        {
+            rupeeperunit=7
+        }
+
+        else if(c>1000)
+        {
+            rupeeperunit=9
+        }
+        rpu.innerHTML=rupeeperunit
+
+        var d=c*rupeeperunit
+        ta.innerHTML=d
+
+        var e=d*18/100
+        gst.innerHTML=e
+
+        var cess=0
+
+         if(c>1000)
+        {
+            cess=1
+        }
+
+        var f=d*1/100
+        cess.innerHTML=f
+
+        var g=d+e+f
+        na.innertHTML=g
+
+    }
+</script>
+
+<html>
+    <input placeholder="Current Reading" type="text" id="cr"><br><br>
+    <input placeholder="Privious Reading" type="text" id="pr"><br><br>
+    <input type="button" value="Get Bill" onclick="getBill()"><br><br>
+    
+    <b>Total Reading:</b>
+    <span id="tr"></span><br><br>
+
+    <b>Rupees Per Unit:</b>
+    <span id="rpu"></span><br><br>
+
+    <b>Total Amount:</b>
+    <span id="ta"></span><br><br>
+
+    <b>GST (18%):</b>
+    <span id="gst"></span><br><br>
+
+    <b>Cess:</b>
+    <span id="cess"></span><br><br>
+
+    <b>Net Amount:</b>
+    <span id="na"></span><br><br>
+
+    <!-- cess and net amount wrong -->
+
+</html>

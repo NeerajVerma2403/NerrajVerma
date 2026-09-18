@@ -1,0 +1,21 @@
+<script>
+    function call()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        var c=parseInt(text3.value)
+
+        var d=a*b*c/100
+        result.innerHTML="Simple Interest:"+d
+
+    }
+</script>
+
+<html>
+    <input placeholder="Enter Principle" type="text" id="text1"><br><br>
+    <input placeholder="Enter Rate" type="text" id="text2"><br><br>
+    <input placeholder="Enter Time" type="text" id="text3"><br><br>
+    <input type="button" value="Simple Interest" id="text" onclick="call()"><br><br>
+    <div id="result">Look At Here....</div>
+
+</html>

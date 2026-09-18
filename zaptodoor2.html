@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadhaar OTP Generation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .api-button {
+      display: inline-block;
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #007bff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .api-button:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aadhaar OTP Generation</h1>
+  <button class="api-button" id="apiButton">Generate OTP</button>
+  <div class="message" id="message"></div>
+
+  <script>
+    document.getElementById("apiButton").addEventListener("click", function () {
+      // API URL
+      const apiUrl = "https://api.quickekyc.com/api/v1/aadhaar-v2/generate-otp";
+
+      // Request payload
+      const requestBody = {
+        key: "123-1234-12345-123456846", // Replace with your actual key
+        id_number: "YourAadhaarNo"      // Replace with your Aadhaar number
+      };
+
+      // Fetch API request
+      fetch(apiUrl, {
+        method: "POST", // Use POST as per the provided curl command
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("API Response:", data);
+          document.getElementById("message").innerHTML = 
+            `<span style="color: green;">OTP generated successfully! Check the console for details.</span>`;
+        })
+        .catch(error => {
+          console.error("Error fetching API:", error);
+          document.getElementById("message").innerHTML = 
+            `<span style="color: red;">Failed to generate OTP. Please try again later.</span>`;
+        });
+    });
+  </script>
+</body>
+</html>

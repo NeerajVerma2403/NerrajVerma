@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Shortcut Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --success-color: #4cc9f0;
+            --danger-color: #f72585;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            color: var(--gray-color);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .shortcuts-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .shortcut-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+            border-left: 5px solid var(--primary-color);
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        
+        .shortcut-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background-color: #eef2ff;
+        }
+        
+        .shortcut-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .shortcut-info {
+            flex: 1;
+        }
+        
+        .shortcut-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .shortcut-url {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .shortcut-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--gray-color);
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .action-btn:hover {
+            color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .delete-btn:hover {
+            color: var(--danger-color);
+            background-color: rgba(247, 37, 133, 0.1);
+        }
+        
+        .backend-panel {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--dark-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #cbd5e0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray-color);
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #cbd5e0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background-color: #eef2ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: #38b000;
+        }
+        
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+        
+        .demo-note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-rocket"></i> Web Shortcut Manager</h1>
+            <p class="subtitle">Quickly access your favorite websites. Add, edit, or remove shortcuts using the backend panel.</p>
+        </header>
+        
+        <div class="demo-note">
+            <i class="fas fa-info-circle"></i> This is a frontend demo. In a real application, the backend panel would connect to a server/database.
+        </div>
+        
+        <div class="main-content">
+            <div class="shortcuts-container">
+                <h2 class="section-title"><i class="fas fa-link"></i> My Shortcuts</h2>
+                
+                <div id="shortcutsList" class="shortcuts-grid">
+                    <!-- Shortcuts will be loaded here dynamically -->
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalShortcuts">0</div>
+                        <div class="stat-label">Total Shortcuts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="favoritesCount">0</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="lastAdded">0</div>
+                        <div class="stat-label">Added Last 7 Days</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="backend-panel">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Backend Panel</h2>
+                <p style="margin-bottom: 20px; color: var(--gray-color);">Add new shortcuts or manage existing ones</p>
+                
+                <form id="shortcutForm">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-tag"></i> Shortcut Name</label>
+                        <input type="text" id="name" placeholder="e.g., Google Drive" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="url"><i class="fas fa-link"></i> URL</label>
+                        <input type="url" id="url" placeholder="https://drive.google.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="icon"><i class="fas fa-icons"></i> Icon (FontAwesome class)</label>
+                        <input type="text" id="icon" placeholder="fas fa-cloud" value="fas fa-globe">
+                        <small style="color: var(--gray-color); margin-top: 5px; display: block;">Use FontAwesome icon classes like "fab fa-google", "fas fa-envelope", etc.</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i> Add Shortcut
+                    </button>
+                </form>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Quick Actions</h3>
+                    <button id="clearAllBtn" class="btn btn-secondary" style="margin-bottom: 10px;">
+                        <i class="fas fa-trash-alt"></i> Clear All Shortcuts
+                    </button>
+                    <button id="loadDemoBtn" class="btn btn-secondary">
+                        <i class="fas fa-magic"></i> Load Demo Shortcuts
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Web Shortcut Manager &copy; 2023 | All shortcuts are stored locally in your browser</p>
+        </footer>
+        
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script>
+        // Sample initial shortcuts
+        let shortcuts = [
+            { id: 1, name: "Google", url: "https://www.google.com", icon: "fab fa-google", favorite: true, createdAt: new Date() },
+            { id: 2, name: "GitHub", url: "https://github.com", icon: "fab fa-github", favorite: false, createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
+            { id: 3, name: "YouTube", url: "https://www.youtube.com", icon: "fab fa-youtube", favorite: true, createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) },
+            { id: 4, name: "Gmail", url: "https://mail.google.com", icon: "fas fa-envelope", favorite: false, createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000) },
+            { id: 5, name: "Twitter", url: "https://twitter.com", icon: "fab fa-twitter", favorite: false, createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000) },
+            { id: 6, name: "LinkedIn", url: "https://www.linkedin.com", icon: "fab fa-linkedin", favorite: false, createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000) },
+        ];
+
+        // DOM Elements
+        const shortcutsList = document.getElementById('shortcutsList');
+        const shortcutForm = document.getElementById('shortcutForm');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const loadDemoBtn = document.getElementById('loadDemoBtn');
+        const notification = document.getElementById('notification');
+        const totalShortcutsEl = document.getElementById('totalShortcuts');
+        const favoritesCountEl = document.getElementById('favoritesCount');
+        const lastAddedEl = document.getElementById('lastAdded');
+
+        // Load shortcuts from localStorage or use sample data
+        function loadShortcuts() {
+            const savedShortcuts = localStorage.getItem('shortcuts');
+            if (savedShortcuts) {
+                const parsed = JSON.parse(savedShortcuts);
+                // Convert date strings back to Date objects
+                shortcuts = parsed.map(s => ({
+                    ...s,
+                    createdAt: new Date(s.createdAt)
+                }));
+            }
+            renderShortcuts();
+            updateStats();
+        }
+
+        // Save shortcuts to localStorage
+        function saveShortcuts() {
+            localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+        }
+
+        // Render all shortcuts
+        function renderShortcuts() {
+            if (shortcuts.length === 0) {
+                shortcutsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>No shortcuts yet</h3>
+                        <p>Add your first shortcut using the backend panel on the right!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            shortcutsList.innerHTML = shortcuts.map(shortcut => `
+                <div class="shortcut-card" data-id="${shortcut.id}">
+                    <div class="shortcut-icon">
+                        <i class="${shortcut.icon}"></i>
+                    </div>
+                    <div class="shortcut-info">
+                        <div class="shortcut-name">${shortcut.name}</div>
+                        <div class="shortcut-url">${shortcut.url}</div>
+                    </div>
+                    <div class="shortcut-actions">
+                        <button class="action-btn favorite-btn" title="${shortcut.favorite ? 'Remove from favorites' : 'Add to favorites'}">
+                            <i class="${shortcut.favorite ? 'fas' : 'far'} fa-star"></i>
+                        </button>
+                        <button class="action-btn delete-btn" title="Delete shortcut">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add event listeners to shortcut cards and buttons
+            document.querySelectorAll('.shortcut-card').forEach(card => {
+                const id = parseInt(card.dataset.id);
+                const shortcut = shortcuts.find(s => s.id === id);
+                
+                // Click on card opens the URL
+                card.addEventListener('click', (e) => {
+                    // Don't open if clicking on buttons
+                    if (e.target.closest('.action-btn')) return;
+                    window.open(shortcut.url, '_blank');
+                });
+                
+                // Favorite button
+                const favoriteBtn = card.querySelector('.favorite-btn');
+                favoriteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFavorite(id);
+                });
+                
+                // Delete button
+                const deleteBtn = card.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteShortcut(id);
+                });
+            });
+        }
+
+        // Add new shortcut
+        function addShortcut(name, url, icon) {
+            const newId = shortcuts.length > 0 ? Math.max(...shortcuts.map(s => s.id)) + 1 : 1;
+            const newShortcut = {
+                id: newId,
+                name,
+                url,
+                icon: icon || 'fas fa-globe',
+                favorite: false,
+                createdAt: new Date()
+            };
+            
+            shortcuts.push(newShortcut);
+            saveShortcuts();
+            renderShortcuts();
+            updateStats();
+            showNotification(`"${name}" shortcut added successfully!`, 'success');
+        }
+
+        // Delete shortcut
+        function deleteShortcut(id) {
+            const shortcut = shortcuts.find(s => s.id === id);
+            if (confirm(`Are you sure you want to delete "${shortcut.name}"?`)) {
+                shortcuts = shortcuts.filter(s => s.id !== id);
+                saveShortcuts();
+                renderShortcuts();
+                updateStats();
+                showNotification(`"${shortcut.name}" shortcut deleted`, 'error');
+            }
+        }
+
+        // Toggle favorite status
+        function toggleFavorite(id) {
+            const shortcut = shortcuts.find(s => s.id === id);
+            shortcut.favorite = !shortcut.favorite;
+            saveShortcuts();
+            renderShortcuts();
+            updateStats();
+            showNotification(
+                `"${shortcut.name}" ${shortcut.favorite ? 'added to' : 'removed from'} favorites`, 
+                'success'
+            );
+        }
+
+        // Update statistics
+        function updateStats() {
+            totalShortcutsEl.textContent = shortcuts.length;
+            favoritesCountEl.textContent = shortcuts.filter(s => s.favorite).length;
+            
+            // Count shortcuts added in the last 7 days
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const recentCount = shortcuts.filter(s => s.createdAt > weekAgo).length;
+            lastAddedEl.textContent = recentCount;
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Clear all shortcuts
+        function clearAllShortcuts() {
+            if (shortcuts.length === 0) {
+                showNotification('No shortcuts to clear', 'error');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete ALL shortcuts? This cannot be undone.')) {
+                shortcuts = [];
+                saveShortcuts();
+                renderShortcuts();
+                updateStats();
+                showNotification('All shortcuts cleared', 'error');
+            }
+        }
+
+        // Load demo shortcuts
+        function loadDemoShortcuts() {
+            if (shortcuts.length > 0 && !confirm('This will replace your current shortcuts with demo data. Continue?')) {
+                return;
+            }
+            
+            shortcuts = [
+                { id: 1, name: "Google", url: "https://www.google.com", icon: "fab fa-google", favorite: true, createdAt: new Date() },
+                { id: 2, name: "GitHub", url: "https://github.com", icon: "fab fa-github", favorite: false, createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
+                { id: 3, name: "YouTube", url: "https://www.youtube.com", icon: "fab fa-youtube", favorite: true, createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) },
+                { id: 4, name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-robot", favorite: true, createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) },
+                { id: 5, name: "Netflix", url: "https://www.netflix.com", icon: "fas fa-tv", favorite: false, createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000) },
+                { id: 6, name: "Amazon", url: "https://www.amazon.com", icon: "fab fa-amazon", favorite: false, createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000) },
+                { id: 7, name: "Reddit", url: "https://www.reddit.com", icon: "fab fa-reddit", favorite: false, createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000) },
+                { id: 8, name: "Notion", url: "https://www.notion.so", icon: "fas fa-sticky-note", favorite: true, createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000) },
+            ];
+            
+            saveShortcuts();
+            renderShortcuts();
+            updateStats();
+            showNotification('Demo shortcuts loaded successfully!', 'success');
+        }
+
+        // Event Listeners
+        shortcutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const url = document.getElementById('url').value.trim();
+            const icon = document.getElementById('icon').value.trim();
+            
+            // Validate URL
+            let finalUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                finalUrl = 'https://' + url;
+            }
+            
+            addShortcut(name, finalUrl, icon);
+            
+            // Reset form
+            shortcutForm.reset();
+            document.getElementById('icon').value = 'fas fa-globe';
+        });
+
+        clearAllBtn.addEventListener('click', clearAllShortcuts);
+        loadDemoBtn.addEventListener('click', loadDemoShortcuts);
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            loadShortcuts();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('Welcome to Web Shortcut Manager! Add your first shortcut.', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

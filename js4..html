@@ -1,0 +1,16 @@
+<script>
+    function call()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        var c=a+b
+        result.innerHTML="Addition:"+c
+    }
+</script>
+
+<html>
+    <input placeholder="Enter First Digit" type="text" id="text1"> <br><br>
+    <input placeholder="Enter Second Digit" type="text" id="text2"> <br><br>
+    <input type="button" value="Addition" onclick="call()"><br><br>
+    <div id="result">See Here.....</div>
+</html>

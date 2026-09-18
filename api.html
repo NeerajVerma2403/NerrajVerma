@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenovo Battery Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .battery-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        h2 {
+            color: #333;
+        }
+        .status {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .charging {
+            color: green;
+            font-weight: bold;
+        }
+        .not-charging {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            function updateBatteryStatus(battery) {
+                document.querySelector('#level').textContent = `Battery Level: ${Math.round(battery.level * 100)}%`;
+
+                if (battery.charging) {
+                    document.querySelector('#charging').textContent = "Charging 🔋";
+                    document.querySelector('#charging').className = "charging";
+
+                    // ✅ Fix: Handle "Infinity" and "0" cases for charging time
+                    if (battery.chargingTime === Infinity || battery.chargingTime === 0) {
+                        document.querySelector('#chargingTime').textContent = "Charging Time: Estimating...";
+                    } else {
+                        let chargeMinutes = Math.floor(battery.chargingTime / 60);
+                        document.querySelector('#chargingTime').textContent = `Charging Time: ${chargeMinutes} min`;
+                    }
+
+                } else {
+                    document.querySelector('#charging').textContent = "Not Charging ❌";
+                    document.querySelector('#charging').className = "not-charging";
+                    document.querySelector('#chargingTime').textContent = "Charging Time: N/A";
+                }
+
+                // ✅ Fix: Handle "Infinity" case for discharging time
+                if (battery.dischargingTime === Infinity || battery.dischargingTime === 0) {
+                    document.querySelector('#dischargingTime').textContent = "Discharging Time: Estimating...";
+                } else {
+                    let dischargeHours = Math.floor(battery.dischargingTime / 3600);
+                    let dischargeMinutes = Math.floor((battery.dischargingTime % 3600) / 60);
+                    document.querySelector('#dischargingTime').textContent = `Discharging Time: ${dischargeHours}h ${dischargeMinutes}m`;
+                }
+
+                // Power Source
+                document.querySelector('#powerSource').textContent = battery.charging ? "Power Source: Plugged In 🔌" : "Power Source: Battery 🔋";
+            }
+
+            if ("getBattery" in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    updateBatteryStatus(battery);
+                    battery.addEventListener("chargingchange", () => updateBatteryStatus(battery));
+                    battery.addEventListener("levelchange", () => updateBatteryStatus(battery));
+                    battery.addEventListener("chargingtimechange", () => updateBatteryStatus(battery));
+                    battery.addEventListener("dischargingtimechange", () => updateBatteryStatus(battery));
+                });
+            } else {
+                document.querySelector('.battery-container').innerHTML = "<h2>Battery API Not Supported</h2>";
+            }
+        };
+    </script>
+</head>
+<body>
+    <h2>🔋 Lenovo Laptop Battery Status</h2>
+    <div class="battery-container">
+        <div class="status" id="level">(Battery level unknown)</div>
+        <div class="status" id="charging">(Charging state unknown)</div>
+        <div class="status" id="chargingTime">(Charging time unknown)</div>
+        <div class="status" id="dischargingTime">(Discharging time unknown)</div>
+        <div class="status" id="powerSource">(Power source unknown)</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<script>
+    function call()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        
+        c=a*b
+        result1.innerHTML="Amount:"+c
+    }
+
+    function dis()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        
+        c=a*b
+        d=c*10/100
+        result2.innerHTML="Discount:"+d
+    }
+
+    function na()
+    {
+        var a=parseInt(text1.value)
+        var b=parseInt(text2.value)
+        
+        c=a*b
+        d=c*10/100
+        e=c-d
+        result3.innerHTML="Net Amount:"+e
+    }
+
+    function clearScreen()
+    {
+        text1.value=" "
+        text2.value=" "
+
+        result1.innerHTML="Look At Here......"
+        result2.innerHTML="Look At Here......"
+        result3.innerHTML="Look At Here......"
+    }
+
+</script>
+
+<html>
+    <input placeholder="Enter Rate" type="text" id="text1"><br><br>
+    <input placeholder="Enter Quantity" type="text" id="text2"><br><br>
+    <input type="button" value="Amount" onclick="call()">
+    <input type="button" value="Discount (10%)" onclick="dis()">
+    <input type="button" value="Net Amount" onclick="na()">
+    <input type="button" value="Clear Screen" onclick="clearScreen()"><br><br>
+    <div id="result1">Look At Here......</div><br>
+    <div id="result2">Look At Here......</div><br>
+    <div id="result3">Look At Here......</div>
+</html>

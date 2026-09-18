@@ -1,0 +1,36 @@
+<script>
+    function initiate()
+    {
+        btn.disabled=true
+    }
+    function call()
+    {
+        im.width=18
+        var na=nam.value
+        for(i=0;i<na.length;i++)
+        {
+            var error=false
+            var a=na.charCodeAt(i)
+            if(!((a>=65 && a<=90) || (a>=97 && a<=122) || (a==32)))
+            {
+                error=true
+                break
+            }
+        }
+        if (error)
+        {
+            im.src="wrong.png"
+        }
+        else
+        {
+            im.src="right.png"
+        }
+    }
+</script>
+<html>
+    <body onload="initiate()">
+        <input type="text" id="nam" placeholder="Enter Name" onkeyup="call()">
+        <span><img id="im"></span><br><br>
+        <input type="button" value="Save" id="btn">
+    </body>
+</html>
